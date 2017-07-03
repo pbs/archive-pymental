@@ -19,11 +19,13 @@ class MetaModel(type):
                 remaining_attrs[attr] = value
 
         remaining_attrs['_fields'] = fields
-        return super().__new__(cls, cls_name, bases, remaining_attrs)
+        return super(MetaModel, cls).__new__(cls, cls_name, bases, remaining_attrs)
 
 
 # base for our custom objects (Job, Input, Profile, etc.) aka models.Model
-class Model(metaclass=MetaModel):
+class Model(object):
+    __metaclass__ = MetaModel
+
     _tag = NotImplementedError
     _attributes = {}
 

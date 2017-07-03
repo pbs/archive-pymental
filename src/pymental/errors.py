@@ -5,14 +5,14 @@ class KonduktorError(Exception):
     def __init__(self, **kwargs):
         kwargs.setdefault('message', self.DM)
         message = self.FMT.format(**kwargs)
-        super().__init__(message)
+        super(KonduktorError, self).__init__(message)
 
 
 class ClientError(KonduktorError):
     FMT = '[{status_code}] {message}'
 
     def __init__(self, message=None, status_code=None):
-        super().__init__(message=message, status_code=status_code)
+        super(ClientError, self).__init__(message=message, status_code=status_code)
         self.status_code = status_code
         self.message = message
 
@@ -22,5 +22,5 @@ class ResourceValidationError(KonduktorError):
 
     def __init__(self, errors):
         message = self.TEMPLATE.format('; '.join(errors))
-        super().__init__(message=message)
+        super(ResourceValidationError, self).__init__(message=message)
         self.errors = errors

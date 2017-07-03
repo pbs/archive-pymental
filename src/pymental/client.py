@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import logging
 import os
 import time
@@ -31,7 +33,7 @@ def parse_errors(content):
     return []
 
 
-class Conductor:
+class Conductor(object):
     def __init__(self, user=None, key=None, server_url=None):
         """
         :param str user:
