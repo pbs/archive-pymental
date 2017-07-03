@@ -12,7 +12,7 @@ def format_attrs(d, omit_nil=True):
     return new_attrs
 
 
-class BaseField:
+class BaseField(object):
     def __init__(self, tag, default=SKIP, description=None):
         self._tag = tag
         self._attributes = {}
@@ -49,7 +49,7 @@ class GenericField(BaseField):
 
 class RelatedField(BaseField):
     def __init__(self, tag, class_, default=SKIP):
-        super().__init__(tag, default=default)
+        super(RelatedField, self).__init__(tag, default=default)
         self.class_ = class_
 
     def value(self, root):
@@ -67,7 +67,7 @@ class RelatedField(BaseField):
 
 class ListField(BaseField):
     def __init__(self, tag, class_, default=SKIP):
-        super().__init__(tag, default)
+        super(ListField, self).__init__(tag, default)
         self.class_ = class_
 
     def value(self, node):
