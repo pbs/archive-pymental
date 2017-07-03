@@ -7,8 +7,8 @@ class Notification(Model):
 
     email = GenericField('email')
     web_callback_url = GenericField('web_callback_url')
-    on_started = GenericField('on_started', default=False)
-    on_complete = GenericField('on_complete', default=False)
-    on_error = GenericField('on_error', default=False)
-    on_warning = GenericField('on_warning', default=False)
-    on_cancel = GenericField('on_cancel', default=False)
+    on_started = GenericField('on_started')
+    on_complete = GenericField('on_complete')
+    on_error = GenericField('on_error')
+    on_warning = GenericField('on_warning')
+    on_cancel = GenericField('on_cancel')
