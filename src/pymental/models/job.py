@@ -15,10 +15,12 @@ from .timecode_config import TimecodeConfig
 class BaseJob(Model):
 
     ad_avail_offset = GenericField('ad_avail_offset')
+    ad_trigger = GenericField('ad_trigger')
     avail_blanking = GenericField('avail_blanking')
     avsync_enable = GenericField('avsync_enable', default=True)
     avsync_pad_trim_audio = GenericField('avsync_pad_trim_audio', default=True)
     image_inserter = GenericField('image_inserter')
+    input = RelatedField('input', Input)
     nielsen_configuration = GenericField('nielsen_configuration')
     notification = RelatedField('notification', Notification)
     output_groups = ListField('output_group', OutputGroup)
@@ -51,7 +53,6 @@ class Job(BaseJob):
     _tag = 'job'
 
     active_input_id = GenericField('active_input_id')
-    ad_trigger = GenericField('ad_trigger')
     audit_messages = RelatedField('audit_messages', AuditMessages)
     average_fps = GenericField('average_fps')
     complete_time = GenericField('complete_time')
@@ -60,7 +61,6 @@ class Job(BaseJob):
     error_messages = RelatedField('error_messages', ErrorMessages)
     errored_time = GenericField('errored_time')
     esam = GenericField('esam')
-    input = RelatedField('input', Input)
     motion_image_inserter = GenericField('motion_image_inserter')
     node = GenericField('node')
     node_id = GenericField('node_id')
