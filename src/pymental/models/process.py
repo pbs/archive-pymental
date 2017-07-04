@@ -9,7 +9,7 @@ class PreProcess(Model):
 
 
 class PostProcess(Model):
-    delete_source = GenericField('delete_source', default=False)
-    delete_source_dir = GenericField('delete_source_dir', default=False)
+    delete_source = GenericField('delete_source')
+    delete_source_dir = GenericField('delete_source_dir')
     processed = RelatedField('processed', Location)
     script = RelatedField('script', Location)
