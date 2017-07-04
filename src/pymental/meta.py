@@ -1,4 +1,5 @@
 import xmltodict
+from six import add_metaclass
 
 from pymental.fields import BaseField, SKIP, format_attrs
 
@@ -23,8 +24,8 @@ class MetaModel(type):
 
 
 # base for our custom objects (Job, Input, Profile, etc.) aka models.Model
+@add_metaclass(MetaModel)
 class Model(object):
-    __metaclass__ = MetaModel
 
     _tag = NotImplementedError
     _attributes = {}
