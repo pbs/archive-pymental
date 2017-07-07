@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from io import BytesIO
 
 from pymental.models import Job, JobProfile, Status
 
 
-class BaseEndpoint:
+class BaseEndpoint(object):
 
     def __init__(self, client):
         """
@@ -64,7 +67,7 @@ class JobEndpoint(BaseEndpoint):
         :return: Job instance
         """
         params = {'clean': clean} if clean else None
-        return super().get(job_id, params=params)
+        return super(JobEndpoint, self).get(job_id, params=params)
 
     def create_from_profile(self, input, profile=None, payload=None, **kwargs):
 
@@ -84,7 +87,7 @@ class JobEndpoint(BaseEndpoint):
         for k, v in kwargs.items():
             setattr(job, k, v)
 
-        return super().create(instance=job)
+        return super(JobEndpoint, self).create(instance=job)
 
     def status(self, resource_id):
         """
