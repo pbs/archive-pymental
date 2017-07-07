@@ -2,10 +2,6 @@
 
 Pymental is a python client used for interacting with AWS Elemental Conductor
 
-## Requirements
-
-* Python3
-
 ## Installation
 
 Install using pip:

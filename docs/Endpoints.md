@@ -6,7 +6,7 @@ Base Endpoints:
 - JobEndpoint
 - JobProfileEndpoint
 
-Endpoints are defined here: [endpoints.py](src/pymental/endpoints.py)
+Endpoints are defined here: [endpoints.py](../src/pymental/endpoints.py)
 
 All the endpoints are mapped on the client at initialization and they are accessible on the client instance.
 ```python
@@ -22,4 +22,4 @@ job_profile = client.profiles.get(elemental_job_profile_id)  # returns a JobProf
 
 ```
 
-Pymental models like **Job**, **JobProfile** and many more are defined [here](src/pymental/models/)
+Pymental models like **Job**, **JobProfile** and many more are defined [here](../src/pymental/models/)
