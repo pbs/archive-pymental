@@ -11,7 +11,7 @@ requires = [
 
 setup(
     name='pymental',
-    version='0.0.5',
+    version='0.0.6',
     description='Client library for interacting with Elemental Conductor',
     author='PBS Core Services Team',
     author_email='pbsi-team-core-services@pbs.org',
