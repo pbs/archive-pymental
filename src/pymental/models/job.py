@@ -87,3 +87,9 @@ class JobProfile(BaseJob):
     name = GenericField('name')
     description = GenericField('description')
     permalink = GenericField('permalink')
+
+
+class JobList(Model):
+    _tag = 'job_list'
+
+    jobs = ListField('job', Job)

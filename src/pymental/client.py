@@ -10,7 +10,8 @@ import requests
 import xmltodict
 from requests.compat import urljoin
 
-from pymental.endpoints import JobEndpoint, JobProfileEndpoint
+from pymental.endpoints import (
+    CloudConfigEndpoint, JobEndpoint, JobProfileEndpoint, NodeEndpoint)
 from pymental.errors import ClientError, ResourceValidationError
 
 logger = logging.getLogger(__name__)
@@ -52,6 +53,8 @@ class Conductor(object):
         # endpoints
         self.jobs = JobEndpoint(self)
         self.profiles = JobProfileEndpoint(self)
+        self.nodes = NodeEndpoint(self)
+        self.cloud_config = CloudConfigEndpoint(self)
 
     def _update_auth_headers(self, href, timeout=30):
         # TODO: some caching for the same url path authentication

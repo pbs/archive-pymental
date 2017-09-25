@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from io import BytesIO
 
-from pymental.models import Job, JobProfile, Status
+from pymental import models
 
 
 class BaseEndpoint(object):
@@ -20,6 +20,10 @@ class BaseEndpoint(object):
 
     @property
     def resource_class(self):
+        raise NotImplementedError
+
+    @property
+    def list_class(self):
         raise NotImplementedError
 
     def get(self, identifier, params=None):
@@ -54,10 +58,16 @@ class BaseEndpoint(object):
         instance = self.resource_class.parse(BytesIO(response.content))
         return instance
 
+    def list(self, **params):
+        response = self._client.get(self.href, params=params)
+        list_instance = self.list_class.parse(BytesIO(response.content))
+        return list_instance
+
 
 class JobEndpoint(BaseEndpoint):
     href = '/jobs'
-    resource_class = Job
+    resource_class = models.Job
+    list_class = models.JobList
 
     def get(self, job_id, clean=False):
         """
@@ -104,4 +114,16 @@ class JobEndpoint(BaseEndpoint):
 
 class JobProfileEndpoint(BaseEndpoint):
     href = '/job_profiles'
-    resource_class = JobProfile
+    resource_class = models.JobProfile
+
+
+class NodeEndpoint(BaseEndpoint):
+    href = '/nodes'
+    resource_class = models.Node
+    list_class = models.NodeList
+
+
+class CloudConfigEndpoint(BaseEndpoint):
+    href = '/config/cloud'
+    resource_class = models.CloudConfig
+    list_class = models.CloudConfig
