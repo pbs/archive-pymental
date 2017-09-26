@@ -87,10 +87,10 @@ class JobEndpoint(BaseEndpoint):
         if profile and payload:
             raise ValueError("Only one of (instance, payload) can be used.")
 
-        profile = JobProfile.parse(payload) if payload else profile
+        profile = models.JobProfile.parse(payload) if payload else profile
         profile._tag = 'job'
 
-        job = Job.parse(profile.unparse())
+        job = models.Job.parse(profile.unparse())
 
         job.input = input
 
@@ -108,7 +108,7 @@ class JobEndpoint(BaseEndpoint):
         """
         href = '{}/{}/status'.format(self.href, int(resource_id))
         response = self._client.get(href)
-        job_status = Status.parse(BytesIO(response.content))
+        job_status = models.Status.parse(BytesIO(response.content))
         return job_status
 
 
