@@ -31,11 +31,17 @@ class NodeList(Model):
 
     nodes = ListField('node', Node)
 
-    def filter(self, **kwargs):
-        if len(kwargs) != 1:
-            raise ValueError("Exactly 1 filter criteria required. "
-                             "e.g. status='active'")
+    def filter(self, product=None, **kwargs):
+        if len(kwargs) != (2 if product else 1):
+            raise ValueError(
+                "Exactly 1 filter criteria required.(Besides product)"
+                "e.g. status='active'")
+
         key, val = kwargs.popitem()
+        if product:
+            return [node for node in self.nodes
+                    if getattr(node, key, None) == val
+                    and node.product == product]
         return [node for node in self.nodes if getattr(node, key, None) == val]
 
     @property
