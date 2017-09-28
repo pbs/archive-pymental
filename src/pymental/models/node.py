@@ -31,18 +31,12 @@ class NodeList(Model):
 
     nodes = ListField('node', Node)
 
-    def filter(self, product=None, **kwargs):
-        if len(kwargs) != (2 if product else 1):
-            raise ValueError(
-                "Exactly 1 filter criteria required.(Besides product)"
-                "e.g. status='active'")
-
-        key, val = kwargs.popitem()
-        if product:
-            return [node for node in self.nodes
-                    if getattr(node, key, None) == val
-                    and node.product == product]
-        return [node for node in self.nodes if getattr(node, key, None) == val]
+    def filter(self, **kwargs):
+        key, value = kwargs.popitem()
+        nodes = [node for node in self.nodes if getattr(node, key, None) == value]
+        if kwargs:
+            nodes = [node for node in self.filter(**kwargs) if node in nodes]
+        return NodeList(nodes=nodes).nodes
 
     @property
     def total_running_jobs(self):
