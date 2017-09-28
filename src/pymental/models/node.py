@@ -31,6 +31,13 @@ class NodeList(Model):
 
     nodes = ListField('node', Node)
 
+    def filter(self, **kwargs):
+        if len(kwargs) != 1:
+            raise ValueError("Exactly 1 filter criteria required. "
+                             "e.g. status='active'")
+        key, val = kwargs.popitem()
+        return [node for node in self.nodes if getattr(node, key, None) == val]
+
     @property
     def total_running_jobs(self):
         try:
